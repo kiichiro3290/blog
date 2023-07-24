@@ -3,7 +3,7 @@ import ErrorPage from "next/error";
 import Container from "../../components/container";
 import PostBody from "../../components/post-body";
 import Header from "../../components/header";
-import PostHeader from "../../components/post-header";
+import PostInfo from "../../components/post-info";
 import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
@@ -28,31 +28,25 @@ export default function Post({ post, allPosts, preview }: Props) {
     <Layout preview={preview}>
       <Header />
       <Container>
-        <div className="flex flex-row">
-          <div className="basis-3/4">
-            {router.isFallback ? (
-              <PostTitle>Loading…</PostTitle>
-            ) : (
-              <>
-                <article className="mb-32">
-                  <Head>
-                    <title>{title}</title>
-                    <meta property="og:image" content={post.ogImage.url} />
-                  </Head>
-                  <PostHeader
-                    title={post.title}
-                    date={post.date}
-                    author={post.author}
-                  />
-                  <PostBody content={post.content} />
-                </article>
-              </>
-            )}
-          </div>
-          <div className="basis-1/3">
-            <Sidebar allPosts={allPosts} />
-          </div>
-        </div>
+        {router.isFallback ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <article className="mb-32 basis-3/4">
+            <Head>
+              <title>{title}</title>
+            </Head>
+            <PostTitle>{title}</PostTitle>
+            <div className="flex flex-row gap-8">
+              <div className="lg:basis-3/4 sm:w-full bg-white rounded-md px-4">
+                <PostBody content={post.content} />
+              </div>
+              <div className="basis-1/3 sm:hidden lg:inline">
+                <PostInfo createdAt={post.createdAt} author={post.author} />
+                <Sidebar allPosts={allPosts} />
+              </div>
+            </div>
+          </article>
+        )}
       </Container>
     </Layout>
   );
@@ -65,15 +59,23 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const allPosts = getAllPosts(["title", "date", "slug", "author"]);
+  const allPosts = getAllPosts([
+    "title",
+    "createdAt",
+    "lastUpdated",
+    "slug",
+    "author",
+    "tags",
+  ]);
 
   const post = getPostBySlug(params.slug, [
     "title",
-    "date",
+    "createdAt",
+    "lastUpdated",
     "slug",
     "author",
     "content",
-    "ogImage",
+    "tags",
   ]);
   const content = await markdownToHtml(post.content || "");
 

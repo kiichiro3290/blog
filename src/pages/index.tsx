@@ -20,22 +20,23 @@ export default function Index({ allPosts }: Props) {
           <title>{`Top Page`}</title>
         </Head>
         <Header />
+
         <Container>
-          <div className="flex flex-row">
-            <div className="basis-3/4">
-              <Intro />
+          <Intro />
+          <div className="flex flex-row gap-8">
+            <div className="lg:basis-3/4 sm:w-full">
               {allPosts &&
                 allPosts.map((post) => (
                   <Posts
                     key={post.slug}
                     title={post.title}
-                    date={post.date}
+                    createdAt={post.createdAt}
                     author={post.author}
                     slug={post.slug}
                   />
                 ))}
             </div>
-            <div className="basis-1/4">
+            <div className="basis-1/4 sm:hidden lg:inline-flex">
               <Sidebar allPosts={allPosts} />
             </div>
           </div>
@@ -47,7 +48,13 @@ export default function Index({ allPosts }: Props) {
 
 // SSG
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(["title", "date", "slug", "author"]);
+  const allPosts = getAllPosts([
+    "title",
+    "createdAt",
+    "lastUpdated",
+    "slug",
+    "author",
+  ]);
 
   return {
     props: { allPosts },
