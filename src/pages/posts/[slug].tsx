@@ -37,10 +37,10 @@ export default function Post({ post, allPosts, preview }: Props) {
             </Head>
             <PostTitle>{title}</PostTitle>
             <div className="flex flex-row gap-8">
-              <div className="basis-3/4 bg-white rounded-md">
+              <div className="lg:basis-3/4 sm:w-full bg-white rounded-md px-4">
                 <PostBody content={post.content} />
               </div>
-              <div className="basis-1/3">
+              <div className="basis-1/3 sm:hidden lg:inline">
                 <PostInfo createdAt={post.createdAt} author={post.author} />
                 <Sidebar allPosts={allPosts} />
               </div>

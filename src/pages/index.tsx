@@ -20,10 +20,11 @@ export default function Index({ allPosts }: Props) {
           <title>{`Top Page`}</title>
         </Head>
         <Header />
+
         <Container>
-          <div className="flex flex-row">
-            <div className="basis-3/4">
-              <Intro />
+          <Intro />
+          <div className="flex flex-row gap-8">
+            <div className="lg:basis-3/4 sm:w-full">
               {allPosts &&
                 allPosts.map((post) => (
                   <Posts
@@ -35,7 +36,7 @@ export default function Index({ allPosts }: Props) {
                   />
                 ))}
             </div>
-            <div className="basis-1/4">
+            <div className="basis-1/4 sm:hidden lg:inline-flex">
               <Sidebar allPosts={allPosts} />
             </div>
           </div>

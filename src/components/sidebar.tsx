@@ -7,7 +7,7 @@ type Props = {
 
 const Sidebar = ({ allPosts }: Props) => {
   return (
-    <div className="flex flex-col sm:hidden lg:inline-flex w-full">
+    <div className="flex flex-col w-full">
       <p className="font-bold text-2xl pb-4">他のページ</p>
       <div className="flex flex-col gap-4 rounded-md bg-white w-full p-4">
         {allPosts &&
