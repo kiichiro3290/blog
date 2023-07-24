@@ -5,12 +5,12 @@ import type Author from "../interfaces/author";
 
 type Props = {
   title: string;
-  date: string;
+  createdAt: string;
   author: Author;
   slug: string;
 };
 
-const PostPreview = ({ title, date, author, slug }: Props) => {
+const PostPreview = ({ title, createdAt, author, slug }: Props) => {
   return (
     <div>
       <h3 className="text-3xl mb-3 leading-snug">
@@ -23,7 +23,7 @@ const PostPreview = ({ title, date, author, slug }: Props) => {
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <DateFormatter dateString={date} />
+        <DateFormatter dateString={createdAt} />
       </div>
       <Avatar name={author.name} picture={author.picture} />
     </div>

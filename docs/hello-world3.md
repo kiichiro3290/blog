@@ -1,6 +1,7 @@
 ---
 title: "Hello World3"
-date: "2020-03-16T05:35:07.322Z"
+createdAt: "2023-07-24"
+lastUpdated: "2023-07-24"
 author:
   name: Kai Kiichiro
   picture: "/assets/blog/authors/kai.png"

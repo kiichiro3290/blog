@@ -5,12 +5,12 @@ import type Author from "../interfaces/author";
 
 type Props = {
   title: string;
-  date: string;
+  createdAt: string;
   author: Author;
   slug: string;
 };
 
-const Posts = ({ title, date, author, slug }: Props) => {
+const Posts = ({ title, createdAt, author, slug }: Props) => {
   return (
     <section>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
@@ -24,8 +24,9 @@ const Posts = ({ title, date, author, slug }: Props) => {
               {title}
             </Link>
           </h3>
-          <div className="mb-4 md:mb-0 text-lg">
-            <DateFormatter dateString={date} />
+          <div className="mb-4 md:mb-0 text-lg flex flex-row">
+            <p>作成日：</p>
+            <DateFormatter dateString={createdAt} />
           </div>
         </div>
         <div>

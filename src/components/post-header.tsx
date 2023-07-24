@@ -5,11 +5,11 @@ import type Author from "../interfaces/author";
 
 type Props = {
   title: string;
-  date: string;
+  createdAt: string;
   author: Author;
 };
 
-const PostHeader = ({ title, date, author }: Props) => {
+const PostHeader = ({ title, createdAt, author }: Props) => {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -21,7 +21,7 @@ const PostHeader = ({ title, date, author }: Props) => {
           <Avatar name={author.name} picture={author.picture} />
         </div>
         <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} />
+          <DateFormatter dateString={createdAt} />
         </div>
       </div>
     </>

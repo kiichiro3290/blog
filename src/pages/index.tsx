@@ -29,7 +29,7 @@ export default function Index({ allPosts }: Props) {
                   <Posts
                     key={post.slug}
                     title={post.title}
-                    date={post.date}
+                    createdAt={post.createdAt}
                     author={post.author}
                     slug={post.slug}
                   />
@@ -47,7 +47,13 @@ export default function Index({ allPosts }: Props) {
 
 // SSG
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(["title", "date", "slug", "author"]);
+  const allPosts = getAllPosts([
+    "title",
+    "createdAt",
+    "lastUpdated",
+    "slug",
+    "author",
+  ]);
 
   return {
     props: { allPosts },

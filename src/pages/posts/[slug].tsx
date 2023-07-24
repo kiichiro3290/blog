@@ -40,7 +40,7 @@ export default function Post({ post, allPosts, preview }: Props) {
                   </Head>
                   <PostHeader
                     title={post.title}
-                    date={post.date}
+                    createdAt={post.createdAt}
                     author={post.author}
                   />
                   <PostBody content={post.content} />
@@ -64,11 +64,19 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const allPosts = getAllPosts(["title", "date", "slug", "author", "tags"]);
+  const allPosts = getAllPosts([
+    "title",
+    "createdAt",
+    "lastUpdated",
+    "slug",
+    "author",
+    "tags",
+  ]);
 
   const post = getPostBySlug(params.slug, [
     "title",
-    "date",
+    "createdAt",
+    "lastUpdated",
     "slug",
     "author",
     "content",
