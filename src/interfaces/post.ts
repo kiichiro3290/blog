@@ -5,9 +5,7 @@ type PostType = {
   title: string
   date: string
   author: Author
-  ogImage: {
-    url: string
-  }
+  tags: string[]
   content: string
 }
 
