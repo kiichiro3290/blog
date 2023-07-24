@@ -10,5 +10,5 @@ ogImage:
 
 ## Hello World3
 
-[Hello World1](hello-world1)  
-[Hello World2](hello-world2)
+[Hello World1](/posts/hello-world1)  
+[Hello World2](/posts/hello-world2)
