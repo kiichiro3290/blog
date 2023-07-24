@@ -10,7 +10,7 @@
   }
   
   .markdown h1 {
-    @apply text-4xl font-bold mt-16 mb-4 leading-snug;
+    @apply text-4xl font-bold mt-16 mb-4 leading-snug border-b-4 border-slate-800;
   }
 
   .markdown h2 {

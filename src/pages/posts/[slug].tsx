@@ -3,7 +3,7 @@ import ErrorPage from "next/error";
 import Container from "../../components/container";
 import PostBody from "../../components/post-body";
 import Header from "../../components/header";
-import PostHeader from "../../components/post-header";
+import PostInfo from "../../components/post-info";
 import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
@@ -28,30 +28,25 @@ export default function Post({ post, allPosts, preview }: Props) {
     <Layout preview={preview}>
       <Header />
       <Container>
-        <div className="flex flex-row">
-          <div className="basis-3/4">
-            {router.isFallback ? (
-              <PostTitle>Loading…</PostTitle>
-            ) : (
-              <>
-                <article className="mb-32">
-                  <Head>
-                    <title>{title}</title>
-                  </Head>
-                  <PostHeader
-                    title={post.title}
-                    createdAt={post.createdAt}
-                    author={post.author}
-                  />
-                  <PostBody content={post.content} />
-                </article>
-              </>
-            )}
-          </div>
-          <div className="basis-1/3">
-            <Sidebar allPosts={allPosts} />
-          </div>
-        </div>
+        {router.isFallback ? (
+          <PostTitle>Loading…</PostTitle>
+        ) : (
+          <article className="mb-32 basis-3/4">
+            <Head>
+              <title>{title}</title>
+            </Head>
+            <PostTitle>{title}</PostTitle>
+            <div className="flex flex-row gap-8">
+              <div className="basis-3/4 bg-white rounded-md">
+                <PostBody content={post.content} />
+              </div>
+              <div className="basis-1/3">
+                <PostInfo createdAt={post.createdAt} author={post.author} />
+                <Sidebar allPosts={allPosts} />
+              </div>
+            </div>
+          </article>
+        )}
       </Container>
     </Layout>
   );
