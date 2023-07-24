@@ -13,6 +13,7 @@ const Sidebar = ({ allPosts }: Props) => {
         {allPosts &&
           allPosts.map((post) => (
             <Link
+              key={post.slug}
               as={`/posts/${post.slug}`}
               href="/posts/[slug]"
               className="hover:underline"

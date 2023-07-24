@@ -27,6 +27,7 @@ export default function Index({ allPosts }: Props) {
               {allPosts &&
                 allPosts.map((post) => (
                   <Posts
+                    key={post.slug}
                     title={post.title}
                     date={post.date}
                     author={post.author}
