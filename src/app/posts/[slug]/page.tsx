@@ -4,25 +4,34 @@ import Layout from "@/components/layout";
 import PostBody from "@/components/post-body";
 import PostInfo from "@/components/post-info";
 import PostTitle from "@/components/post-title";
-import { getPost } from "@/lib/api";
+import { getPost, getPostSlugs } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Head from "next/head";
 
-type Props = {
-  params: {
-    slug: string;
-  };
+type Param = {
+  slug: string;
 };
+
+type Props = {
+  params: Param;
+};
+
+export async function generateStaticParams(): Promise<Param[]> {
+  const slugs = getPostSlugs();
+  return slugs.map((slug) => {
+    const realSlug = slug.replace(/\.md$/, "");
+    return { slug: realSlug };
+  });
+}
 
 export default async function Page({ params }: Props) {
   const post = getPost(params.slug);
   const content = await markdownToHtml(post.content);
   const title = `${post.title}`;
 
-  if (!post?.slug) {
-    // return <ErrorPage statusCode={404} />;
-    // TODO: エラーページ作成
-  }
+  // if (!post?.slug) {
+  // return <>404: NotFound</>;
+  // }
 
   return (
     <Layout>
