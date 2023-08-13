@@ -1,8 +1,9 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import Post from '@/interfaces/post'
 
-const postsDirectory = join(process.cwd(), '_docs')
+const postsDirectory = join(process.cwd(), 'src/docs/')
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
@@ -13,6 +14,8 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fullPath = join(postsDirectory, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
+
+  console.log(data, content)
 
   type Items = {
     [key: string]: string
@@ -37,11 +40,34 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items
 }
 
-export function getAllPosts(fields: string[] = []) {
+export function getPost(slug: string): Post {
+  const realSlug = slug.replace(/\.md$/, '')
+  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf-8')
+  const { data, content } = matter(fileContents)
+
+  return {
+    slug: realSlug,
+    title: data.title,
+    createdAt: data.createdAt,
+    lastUpdated: data.lastUpdated,
+    author: data.author,
+    tags: data.tags,
+    content: content
+  }
+
+}
+
+// フィールドに欲しい値を入力する→柔軟
+export function getAllPosts(): Post[] {
+  
   const slugs = getPostSlugs()
+
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => {
+      return getPost(slug)
+    })
     // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    .sort((post1, post2) => (post1.lastUpdated > post2.lastUpdated ? -1 : 1))
   return posts
 }

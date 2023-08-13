@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Post from "../interfaces/post";
+import PostType from "@/interfaces/post";
 
 type Props = {
-  allPosts: Post[];
+  allPosts: PostType[];
 };
 
 const Sidebar = ({ allPosts }: Props) => {
