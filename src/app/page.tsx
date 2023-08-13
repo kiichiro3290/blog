@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Layout from "./layout";
 import { getAllPosts } from "@/lib/api";
 import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
@@ -11,7 +10,7 @@ export default function Page() {
   const allPosts = getAllPosts();
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>{`Top Page`}</title>
       </Head>
@@ -19,8 +18,8 @@ export default function Page() {
 
       <Container>
         <Intro />
-        <div className="flex flex-row gap-8">
-          <div className="lg:basis-3/4 sm:w-full">
+        <div className="flex flex-row gap-8 pb-32">
+          <div className="lg:basis-3/4 w-full">
             {allPosts &&
               allPosts.map((post) => (
                 <Posts
@@ -32,11 +31,11 @@ export default function Page() {
                 />
               ))}
           </div>
-          <div className="basis-1/4 sm:hidden lg:inline-flex">
+          <div className="basis-1/4 hidden lg:inline-flex">
             <Sidebar allPosts={allPosts} />
           </div>
         </div>
       </Container>
-    </Layout>
+    </>
   );
 }
