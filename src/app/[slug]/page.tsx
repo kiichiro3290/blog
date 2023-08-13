@@ -27,6 +27,7 @@ export async function generateStaticParams(): Promise<Param[]> {
 
 export default async function Page({ params }: Props) {
   if (!params.slug) {
+    // TODO: NotFoundページ
     return <>404: NotFound</>;
   }
 

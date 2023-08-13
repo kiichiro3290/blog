@@ -10,5 +10,5 @@ tags: ["markdown", "test"]
 
 # Hello World2
 
-[Hello World1](/posts/hello-world1)  
-[Hello World3](/posts/hello-world3)
+[Hello World1](/hello-world1)  
+[Hello World3](/hello-world3)
