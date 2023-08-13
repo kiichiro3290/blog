@@ -4,7 +4,8 @@ import Layout from "@/components/layout";
 import PostBody from "@/components/post-body";
 import PostInfo from "@/components/post-info";
 import PostTitle from "@/components/post-title";
-import { getPost, getPostSlugs } from "@/lib/api";
+import Sidebar from "@/components/sidebar";
+import { getAllPosts, getPost, getPostSlugs } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Head from "next/head";
 
@@ -25,13 +26,14 @@ export async function generateStaticParams(): Promise<Param[]> {
 }
 
 export default async function Page({ params }: Props) {
+  if (!params.slug) {
+    return <>404: NotFound</>;
+  }
+
   const post = getPost(params.slug);
+  const allPosts = getAllPosts();
   const content = await markdownToHtml(post.content);
   const title = `${post.title}`;
-
-  // if (!post?.slug) {
-  // return <>404: NotFound</>;
-  // }
 
   return (
     <Layout>
@@ -48,7 +50,7 @@ export default async function Page({ params }: Props) {
             </div>
             <div className="basis-1/3 sm:hidden lg:inline">
               <PostInfo createdAt={post.createdAt} author={post.author} />
-              {/* <Sidebar allPosts={allPosts} /> */}
+              <Sidebar allPosts={allPosts} />
             </div>
           </div>
         </article>
