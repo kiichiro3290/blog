@@ -5,6 +5,7 @@ import PostBody from "@/components/post-body";
 import PostInfo from "@/components/post-info";
 import PostTitle from "@/components/post-title";
 import { getPost } from "@/lib/api";
+import markdownToHtml from "@/lib/markdownToHtml";
 import Head from "next/head";
 
 type Props = {
@@ -13,8 +14,9 @@ type Props = {
   };
 };
 
-export default function Page({ params }: Props) {
+export default async function Page({ params }: Props) {
   const post = getPost(params.slug);
+  const content = await markdownToHtml(post.content);
   const title = `${post.title}`;
 
   if (!post?.slug) {
@@ -33,7 +35,7 @@ export default function Page({ params }: Props) {
           <PostTitle>{title}</PostTitle>
           <div className="flex flex-row gap-8">
             <div className="lg:basis-3/4 sm:w-full bg-white rounded-md px-4">
-              <PostBody content={post.content} />
+              <PostBody content={content} />
             </div>
             <div className="basis-1/3 sm:hidden lg:inline">
               <PostInfo createdAt={post.createdAt} author={post.author} />

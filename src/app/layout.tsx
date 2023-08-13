@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@/styles/globals.css";
 import Meta from "@/components/meta";
 
 export const metadata = {

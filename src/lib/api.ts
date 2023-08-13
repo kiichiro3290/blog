@@ -2,6 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import Post from '@/interfaces/post'
+import markdownToHtml from './markdownToHtml'
 
 const postsDirectory = join(process.cwd(), 'src/docs/')
 
@@ -65,9 +66,11 @@ export function getAllPosts(): Post[] {
 
   const posts = slugs
     .map((slug) => {
-      return getPost(slug)
+      const post = getPost(slug)
+      return post
     })
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.lastUpdated > post2.lastUpdated ? -1 : 1))
+
   return posts
 }
