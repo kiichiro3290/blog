@@ -6,7 +6,7 @@ import type Author from "../interfaces/author";
 type Props = {
   title: string;
   createdAt: string;
-  author: Author;
+  author?: Author;
   slug: string;
 };
 
