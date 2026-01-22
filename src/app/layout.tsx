@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import Meta from "@/app/meta";
-import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 export const metadata = {
   title: "kai dev blog",
@@ -16,8 +16,8 @@ export default function RootLayout({
     <html lang="ja">
       <Meta />
       <body>
+        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );
