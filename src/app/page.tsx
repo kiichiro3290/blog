@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { getAllPosts } from "@/lib/api";
-import Header from "@/components/header";
 import Container from "@/components/container";
-import Posts from "@/components/posts";
+import Canvas from "@/components/canvas";
 
 export default function Page() {
   const allPosts = getAllPosts();
@@ -14,16 +13,9 @@ export default function Page() {
       </Head>
       <Container>
         <div className="flex flex-col gap-8 pb-32 max-w-2xl mx-auto items-center mt-16">
-          {allPosts &&
-            allPosts.map((post) => (
-              <Posts
-                key={post.slug}
-                title={post.title}
-                createdAt={post.createdAt}
-                author={post.author}
-                slug={post.slug}
-              />
-            ))}
+          <div className="w-full h-full">
+            <Canvas posts={allPosts} />
+          </div>
         </div>
       </Container>
     </>
