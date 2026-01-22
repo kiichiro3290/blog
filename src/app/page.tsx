@@ -13,7 +13,7 @@ export default function Page() {
         <title>{`Top Page`}</title>
       </Head>
       <Container>
-        <div className="flex flex-col gap-8 pb-32 mx-auto items-center mt-16">
+        <div className="flex flex-col gap-8 pb-32 max-w-2xl mx-auto items-center mt-16">
           {allPosts &&
             allPosts.map((post) => (
               <Posts
